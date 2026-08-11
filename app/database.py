@@ -10,33 +10,14 @@ CREATE TABLE sessions (
 );
 ```
 """
-from collections.abc import Generator
 from datetime import datetime
 from uuid import UUID
 
 import psycopg
 from psycopg.rows import class_row
 from pydantic import BaseModel
-from sqlalchemy import create_engine
-from sqlalchemy.orm import DeclarativeBase, sessionmaker
-from sqlalchemy.orm import Session as SASession
 
 from app.config import settings
-
-engine = create_engine(settings.database_url, pool_pre_ping=True)
-SessionLocal = sessionmaker(bind=engine, autoflush=False, autocommit=False)
-
-
-class Base(DeclarativeBase):
-    pass
-
-
-def get_db() -> Generator[SASession, None, None]:
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
 
 
 class Session(BaseModel):
