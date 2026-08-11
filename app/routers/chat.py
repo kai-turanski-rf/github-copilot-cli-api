@@ -1,5 +1,7 @@
 from fastapi import APIRouter
 from pydantic import BaseModel, Field
+import uuid
+from datetime import datetime
 
 from app import cli_connect, database
 
@@ -13,7 +15,8 @@ class ChatRequest(BaseModel):
 
 @router.post("")
 def get_completion(request: ChatRequest) -> dict[str, str]:
-    session = database.create_session()
+    # session = database.create_session()
+    session = database.Session(id=uuid.uuid7(), time_started=datetime.now())
 
     if request.system_prompt:
         prompt = build_prompt(request.system_prompt, request.user_prompt)
