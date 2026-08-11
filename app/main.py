@@ -1,10 +1,11 @@
 from fastapi import FastAPI
 import uvicorn
 
-from app.routers import sessions
+from app.routers import chat, sessions
 
 app = FastAPI(title="GitHub Copilot API")
 app.include_router(sessions.router, prefix="/api/v1")
+app.include_router(chat.router, prefix="/api/v1")
 
 
 @app.get("/api/v1/test")

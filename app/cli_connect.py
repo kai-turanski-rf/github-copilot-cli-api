@@ -44,7 +44,7 @@ def get_copilot_completion(
     prompt: str,
     session_id: UUID | str | None,
     model: str = DEFAULT_MODEL,
-    timeout: float | None = 10.0,
+    timeout: float | None = 100.0,
 )-> str:
     """Run `gh copilot` with the given prompt/session and return its stdout."""
     command = build_copilot_command(prompt, session_id, model)
@@ -55,4 +55,4 @@ def get_copilot_completion(
         timeout=timeout,
         check=True,
     )
-    return result.stdout
+    return result.stdout.strip() if result.stdout else result.stderr.strip() if result.stderr else ""
