@@ -8,13 +8,19 @@ FastAPI app, optionally backed by a containerized Postgres 18 database.
 
 ## Setup
 
-1. Copy the environment file:
+1. Install Github Copilot CLI
+
+   There are two ways, if you can install through the `gh` CLI, then you're all set. 
+   
+   Otherwise, you can install it by running `copilot` in VSCode. In this second case, please comment out the `gh` line in [cli_connect.py](<./app/cli_connect.py#L25>)
+
+2. Copy the environment file:
 
    ```bash
    cp .env.example .env
    ```
 
-2. Create a virtual environment and install dependencies:
+3. Create a virtual environment and install dependencies:
 
    ```bash
    python -m venv .venv
@@ -22,7 +28,7 @@ FastAPI app, optionally backed by a containerized Postgres 18 database.
    pip install -r requirements.txt
    ```
 
-3. Run the API:
+4. Run the API:
 
    ```bash
    python -m app.main
