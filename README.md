@@ -25,7 +25,7 @@ FastAPI app, optionally backed by a containerized Postgres 18 database.
 3. Run the API:
 
    ```bash
-   python app/main.py
+   python -m app.main
    ```
 
 ## Test
