@@ -15,6 +15,7 @@ class ChatRequest(BaseModel):
 
 @router.post("")
 def get_completion(request: ChatRequest) -> dict[str, str]:
+    # Use this instead if you want to integrate with the DB
     # session = database.create_session()
     session = database.Session(id=uuid.uuid7(), time_started=datetime.now())
 

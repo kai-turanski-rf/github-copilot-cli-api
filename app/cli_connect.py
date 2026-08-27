@@ -56,3 +56,23 @@ def get_copilot_completion(
         check=True,
     )
     return result.stdout.strip() if result.stdout else result.stderr.strip() if result.stderr else ""
+
+def get_copilot_completion_without_capturing_input(
+    prompt: str,
+    session_id: UUID | str | None,
+    model: str = DEFAULT_MODEL,
+    timeout: float | None = 100.0,
+)-> str:
+    """Run `gh copilot` with the given prompt/session, but don't capture stdout.
+    
+    Useful for completing the authorization step, if it is required.
+    """
+    command = build_copilot_command(prompt, session_id, model)
+    result = subprocess.run(
+        command,
+        capture_output=True,
+        text=True,
+        timeout=timeout,
+        check=True,
+    )
+    return result.stdout.strip() if result.stdout else result.stderr.strip() if result.stderr else ""
